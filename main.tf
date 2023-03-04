@@ -29,14 +29,15 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "4.11.0"
+      version = "~> 4.0"
     }
   }
 }
 
 provider "aws" {
   region     = "ap-northeast-1"
-}resource "aws_instance" "myec2" {
+}
+resource "aws_instance" "myec2" {
   ami                    = "ami-0b828c1c5ac3f13ee"
   instance_type          = "t2.micro"
   availability_zone = "ap-northeast-1a"
