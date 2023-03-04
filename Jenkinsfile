@@ -28,7 +28,7 @@ node{
         
     
     
-   /* stage('Apply the changes'){
+   stage('Apply the changes'){
         
         sh 'terraform apply --auto-approve'
         
@@ -41,10 +41,10 @@ node{
     
     
     
-    */
+    /*
     stage('destroy terraform'){
     
     sh 'terraform destroy --auto-approve'
-}
+}*/
     
 }
