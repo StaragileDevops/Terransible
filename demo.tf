@@ -111,7 +111,7 @@ resource "aws_instance" "proj-instance" {
  device_index = 0
  network_interface_id = aws_network_interface.proj-ni.id
 }
-}
+
 provisioner "local-exec" {
     command = "echo ${aws_instance.terraform.public_ip} >> /etc/ansible/hosts"
 }
