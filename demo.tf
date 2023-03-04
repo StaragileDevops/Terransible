@@ -9,8 +9,6 @@ terraform {
 }
 provider "aws" {
  region = "ap-northeast-1"
- access_key = "AKIA5QYQHL5JCIEGPHPG"
- secret_key = "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"
 }
 # Creating a VPC
 resource "aws_vpc" "proj-vpc" {
@@ -105,11 +103,11 @@ resource "aws_eip" "proj-eip" {
 # Creating an Ubuntu EC2 instance
 resource "aws_instance" "proj-instance" {
  ami = "ami-0b828c1c5ac3f13ee"
- instance_type = "t2.nano"
+ instance_type = "t2.micro"
  availability_zone = "ap-northeast-1a"
  key_name = "Jen"
  tags = {
- Name = "For-Assignment"}
+ Name = "For-JenkinsIntegration"}
  network_interface {
  device_index = 0
  network_interface_id = aws_network_interface.proj-ni.id
