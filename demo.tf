@@ -106,7 +106,9 @@ resource "aws_instance" "terraform" {
  network_interface_id = aws_network_interface.proj-ni.id
 }
 
-provisioner "local-exec" {command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u {var.user} -i '${self.ipv4_address},' --private-key ${var.ssh_private_key} playbook.yml"}
+provisioner "local-exec" {
+    command = "echo ${aws_instance.terraform.public_ip} >> /etc/ansible/hosts"
+}
 }
 
 
