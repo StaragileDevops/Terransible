@@ -107,7 +107,7 @@ resource "aws_instance" "terraform" {
 }
 
 provisioner "local-exec" {
-    command = "echo ${aws_instance.terraform.public_ip} >> /home/ubuntu"
+    command = "echo ${aws_instance.terraform.public_ip} >> /home/ubuntu/inventory"
 }
 }
 
