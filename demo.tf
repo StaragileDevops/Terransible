@@ -23,4 +23,5 @@ resource "aws_instance" "terraform"{
 provisioner "local-exec" {
     command = "echo ${aws_instance.terraform.public_ip} > /etc/ansible/hosts"
 }
+}
 
