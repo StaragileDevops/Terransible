@@ -100,7 +100,7 @@ resource "aws_eip" "proj-eip" {
  associate_with_private_ip = "10.0.1.10"
 }
 # Creating an Ubuntu EC2 instance
-resource "aws_instance" "proj-instance" {
+resource "aws_instance" "terraform" {
  ami = "ami-0b828c1c5ac3f13ee"
  instance_type = "t2.micro"
  availability_zone = "ap-northeast-1a"
