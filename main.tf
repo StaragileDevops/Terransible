@@ -49,10 +49,8 @@ resource "aws_instance" "myec2" {
   availability_zone = "ap-northeast-1a"
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   key_name = "Jen"
-  
-
   tags = {
-    name = "testec2"
+    Name = "test-server"
   }
 
   provisioner "local-exec" {
