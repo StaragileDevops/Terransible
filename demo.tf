@@ -1,18 +1,58 @@
 
 terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-  }
+ required_providers {
+ aws = {
+ source = "hashicorp/aws"
+ version = "~> 4.0"
+ }
+ }
 }
-# Configure the AWS Provider
 provider "aws" {
-  region = "ap-northeast-1"
-  
+ region = "ap-northeast-1"
+ access_key = "AKIA5QYQHL5JCIEGPHPG"
+ secret_key = "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"
 }
-
+# Creating a VPC
+resource "aws_vpc" "proj-vpc" {
+ cidr_block = "10.0.0.0/16"
+}
+# Create an Internet Gateway
+resource "aws_internet_gateway" "proj-ig" {
+ vpc_id = aws_vpc.proj-vpc.id
+ tags = {
+ Name = "gateway1"
+ }
+}
+# Setting up the route table
+resource "aws_route_table" "proj-rt" {
+ vpc_id = aws_vpc.proj-vpc.id
+ route {
+ # pointing to the internet
+ cidr_block = "0.0.0.0/0"
+ gateway_id = aws_internet_gateway.proj-ig.id
+ }
+ route {
+ ipv6_cidr_block = "::/0"
+ gateway_id = aws_internet_gateway.proj-ig.id
+ }
+ tags = {
+ Name = "rt1"
+ }
+}
+# Setting up the subnet
+resource "aws_subnet" "proj-subnet" {
+ vpc_id = aws_vpc.proj-vpc.id
+ cidr_block = "10.0.1.0/24"
+ availability_zone = "ap-northeast-1a"
+ tags = {
+ Name = "subnet1"
+ }
+}
+# Associating the subnet with the route table
+resource "aws_route_table_association" "proj-rt-sub-assoc" {
+ subnet_id = aws_subnet.proj-subnet.id
+ route_table_id = aws_route_table.proj-rt.id
+}
 # Creating a Security Group
 resource "aws_security_group" "proj-sg" {
  name = "proj-sg"
@@ -50,14 +90,32 @@ ingress {
  Name = "proj-sg1"
  }
 }
-
-#Define Infrastructure
-resource "aws_instance" "terraform"{
-	ami = "ami-0b828c1c5ac3f13ee"
-	instance_type = "t2.micro"
-	tags = {
-	Name = "Terraform Instance 1"
+# Creating a new network interface
+resource "aws_network_interface" "proj-ni" {
+ subnet_id = aws_subnet.proj-subnet.id
+ private_ips = ["10.0.1.10"]
+ security_groups = [aws_security_group.proj-sg.id]
 }
+# Attaching an elastic IP to the network interface
+resource "aws_eip" "proj-eip" {
+ vpc = true
+ network_interface = aws_network_interface.proj-ni.id
+ associate_with_private_ip = "10.0.1.10"
+}
+# Creating an Ubuntu EC2 instance
+resource "aws_instance" "proj-instance" {
+ ami = "ami-0b828c1c5ac3f13ee"
+ instance_type = "t2.nano"
+ availability_zone = "ap-northeast-1a"
+ key_name = "Jen"
+ tags = {
+ Name = "For-Assignment"}
+ network_interface {
+ device_index = 0
+ network_interface_id = aws_network_interface.proj-ni.id
+}
+}
+
 provisioner "local-exec" {
     command = "echo ${aws_instance.terraform.public_ip} >> /etc/ansible/hosts"
 }
