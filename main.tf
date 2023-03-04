@@ -56,7 +56,7 @@ resource "aws_instance" "myec2" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.myec2.public_ip} >> /etc/ansible/hosts"
+    command = "echo ${aws_instance.myec2.public_ip} > /etc/ansible/hosts"
   }
 }
 resource "aws_key_pair" "deployer" {
