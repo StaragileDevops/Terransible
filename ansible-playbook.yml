@@ -17,4 +17,4 @@
     become_user : root
 
   - name: Deploy Docker Container
-    command: docker run -itd -p 8081:8081 staragiledevops/insdemo:1.0
+    command: docker run -itd -p 8082:8082 staragiledevops/financeme:1.0
