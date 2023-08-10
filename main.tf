@@ -48,7 +48,7 @@ resource "aws_instance" "myec2" {
   instance_type          = "t2.micro"
   availability_zone = "ap-northeast-1a"
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
-  key_name = "Jen"
+  key_name = "Jens"
   tags = {
     Name = "test-server"
   }
@@ -59,5 +59,5 @@ resource "aws_instance" "myec2" {
 }
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0M5dm8dWE4Cd37s0i7kbAjYw3Rf/gDMNhzrLXhH+MyQJUcCrDSLHnGg8GDz/AdVcYuPAoCBxAGWJkLhqpn4C/i+9xiuCmQAh4CeA76fBtjACWiwXb/O71bm4/KSWkhzFOmffJs5vmvMD/GFUPSZdLkwa9hPxTAG1WFKNrw2eIUzHI3hbace/FYidVTglo1ls6y/mKYwA2QXlNBEkQCzRSUo+rQblnNG36hQhmLYHEEWFDdK/OE2KfhkL9coNf1mcrccWXtND48F9dqVPW8LKfJ19ZMEwGeMiprNHjVSmzPzJQuLsORART/G02nhDu96TOtGMaZjEua5p8QPzS8HWv"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFqn8jb///hPrhWI4JnbfJRl6sWHzfbcEobKta6zk1jcrIIaVhXNSUSlcGi0KkhFoVYAWBw65G9qEDAzYCs+v8Px3HIkiqorcb0oOgguC2PiEw4G//KyNas/J2Q1NZZo+nL8J7Aih7olYt/TrjfZ11GRdH9XtCJQHqbbvYTI9tQIcZJgT22nsYcA9gj7aAXM56wES7TpFPef94PcEHKnkid8PapfngSNJfyWc+GinNGH+YxpxRqL3J6g43LbESA0l/ADALvT1rxRCqK9/bJUd6bR8KoK/zr6p2L06Kpq7jhgM+Be5FkzPATQk0pUmvID3xPq4dG/XtiUCwdhanQJFJ Jens"
 }
