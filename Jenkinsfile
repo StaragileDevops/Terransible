@@ -17,13 +17,15 @@ node{
     
      stage('Plan Terraform'){
          
-         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: '')]) {
+       /*  withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: '')]) {
 
         withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: '')]) {
     
-        sh 'terraform plan'
+        
         }
          }
+*/
+         sh 'terraform plan'
      }
         
     
