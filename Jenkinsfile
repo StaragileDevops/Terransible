@@ -36,7 +36,7 @@ node{
     
     stage('configuring newly created machine with ansible'){
     
-    ansiblePlaybook become: true, credentialsId: 'ansible-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml'
+    ansiblePlaybook become: true, credentialsId: 'ansible-keys', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml'
     }
     
     
