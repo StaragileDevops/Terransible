@@ -7,3 +7,4 @@ Steps to be taken:
 4.	 If using Jenkins add the above credentials with credentials binding option in pipeline syntax generator
 5.	 Modify and assign Admin access IAM role to EC2 instance to give Jenkins necessary permissions.
 6.	 Edit Visudo file and give Jenkins superuser permission, if running via Jenkins.
+7.	 Grant chmod 666 to /etc/anisble/hosts, and copy the .pem file in ansible credentials section
